@@ -13,8 +13,23 @@ import Firebase
 class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     
-    fileprivate var imageNames =  ["태1.jpeg", "태2.jpeg", "태3.jpeg", "태4.jpeg"]
+    var imageNames: Array<Any> = []
     fileprivate let adNames = ["광1.png", "광2.png", "광3.png"]
+    
+    func uploadNewPost() {
+        let ref = Storage.storage().reference().child("posts/")
+        ref.getData(maxSize: 1 * 1024 * 1024) { (data, err) in
+            if let err = err {
+                print(err)
+                return
+            }
+            let image = UIImage(data: data!)
+            self.imageNames.append(image as Any)
+            if self.imageNames.count == 5 {
+                return
+            }
+        }
+    }
     
     
     private lazy var hotPostView: FSPagerView = {
@@ -64,7 +79,7 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         if pagerView == hotPostView {
-            cell.imageView?.image = UIImage(named: self.imageNames[index])
+            cell.imageView?.image = UIImage(named: self.imageNames[index] as! String)
             cell.imageView?.contentMode = .scaleAspectFill
         }
         else {
@@ -87,6 +102,7 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
     }()
 
     override func viewDidLoad() {
+        uploadNewPost()
         setupNavigationItems()
         self.view.backgroundColor = .white
         view.addSubview(backgroundView)

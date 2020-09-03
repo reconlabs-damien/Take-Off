@@ -47,6 +47,7 @@
 		BF6828D024ECF61C008916B1 /* 광2.png in Resources */ = {isa = PBXBuildFile; fileRef = BF6828CD24ECF61C008916B1 /* 광2.png */; };
 		BF6828D124ECF61C008916B1 /* 광1.png in Resources */ = {isa = PBXBuildFile; fileRef = BF6828CE24ECF61C008916B1 /* 광1.png */; };
 		BF6828D224ECF61C008916B1 /* 광3.png in Resources */ = {isa = PBXBuildFile; fileRef = BF6828CF24ECF61C008916B1 /* 광3.png */; };
+		BF7D91BF24F7BC940005D459 /* AddListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D91BE24F7BC940005D459 /* AddListController.swift */; };
 		BF906BEE249AEFE100BCB364 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BED249AEFE100BCB364 /* MessageController.swift */; };
 		BF906BF0249AF10300BCB364 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BEF249AF10300BCB364 /* Message.swift */; };
 		BF906BF2249AF3BB00BCB364 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BF1249AF3BB00BCB364 /* UserCell.swift */; };
@@ -56,8 +57,8 @@
 		BF906BFA249B0ED500BCB364 /* ChatInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BF9249B0ED500BCB364 /* ChatInputContainerView.swift */; };
 		BF906BFC249B32DD00BCB364 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BFB249B32DD00BCB364 /* MainController.swift */; };
 		BFC89F34249B8172009A4825 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFC89F33249B8172009A4825 /* GoogleService-Info.plist */; };
+		BFDAC65424FBC5530011786A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC65324FBC5530011786A /* Calendar.swift */; };
 		BFEC6FD624F3E44B006BA07E /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEC6FD524F3E44B006BA07E /* CalendarCell.swift */; };
-		BFEC6FD824F3EAD1006BA07E /* PersonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEC6FD724F3EAD1006BA07E /* PersonData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		BF6828CD24ECF61C008916B1 /* 광2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "광2.png"; path = "../../../광2.png"; sourceTree = "<group>"; };
 		BF6828CE24ECF61C008916B1 /* 광1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "광1.png"; path = "../../../광1.png"; sourceTree = "<group>"; };
 		BF6828CF24ECF61C008916B1 /* 광3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "광3.png"; path = "../../../광3.png"; sourceTree = "<group>"; };
+		BF7D91BE24F7BC940005D459 /* AddListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListController.swift; sourceTree = "<group>"; };
 		BF906BED249AEFE100BCB364 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		BF906BEF249AF10300BCB364 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		BF906BF1249AF3BB00BCB364 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -115,8 +117,8 @@
 		BF906BFB249B32DD00BCB364 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		BFB5522424D10D9400E9748C /* Take-OffRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Take-OffRelease.entitlements"; sourceTree = "<group>"; };
 		BFC89F33249B8172009A4825 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		BFDAC65324FBC5530011786A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		BFEC6FD524F3E44B006BA07E /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
-		BFEC6FD724F3EAD1006BA07E /* PersonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +170,7 @@
 			children = (
 				BF62481F249C4B4A00C1B4A9 /* CalenderController.swift */,
 				BFEC6FD524F3E44B006BA07E /* CalendarCell.swift */,
-				BFEC6FD724F3EAD1006BA07E /* PersonData.swift */,
+				BF7D91BE24F7BC940005D459 /* AddListController.swift */,
 			);
 			path = Calender;
 			sourceTree = "<group>";
@@ -264,6 +266,7 @@
 				BF6616A1248FAE8E0072A6F9 /* User.swift */,
 				BF6616A3248FAEA40072A6F9 /* Comment.swift */,
 				BF906BEF249AF10300BCB364 /* Message.swift */,
+				BFDAC65324FBC5530011786A /* Calendar.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -442,7 +445,6 @@
 				BF6616AB248FAF120072A6F9 /* CommentsController.swift in Sources */,
 				BF906BFC249B32DD00BCB364 /* MainController.swift in Sources */,
 				BF6616AD248FAF270072A6F9 /* CommentCell.swift in Sources */,
-				BFEC6FD824F3EAD1006BA07E /* PersonData.swift in Sources */,
 				BF6616B5248FAF920072A6F9 /* CameraController.swift in Sources */,
 				BF624820249C4B4A00C1B4A9 /* CalenderController.swift in Sources */,
 				BF6616B2248FAF690072A6F9 /* UserSearchCell.swift in Sources */,
@@ -452,9 +454,11 @@
 				BF661697248FADEC0072A6F9 /* PhotoSelectorController.swift in Sources */,
 				BF6616A9248FAEF70072A6F9 /* HomePostCell.swift in Sources */,
 				BF66168D248FAD130072A6F9 /* UserProfileHeader.swift in Sources */,
+				BFDAC65424FBC5530011786A /* Calendar.swift in Sources */,
 				BF66166F248FA8D30072A6F9 /* SceneDelegate.swift in Sources */,
 				BF66168B248FACF10072A6F9 /* UserProfileController.swift in Sources */,
 				BF6616A4248FAEA40072A6F9 /* Comment.swift in Sources */,
+				BF7D91BF24F7BC940005D459 /* AddListController.swift in Sources */,
 				BF6616A2248FAE8E0072A6F9 /* User.swift in Sources */,
 				BF661684248FAC660072A6F9 /* Extension.swift in Sources */,
 				BF66169B248FAE250072A6F9 /* PhotoSelectorHeader.swift in Sources */,

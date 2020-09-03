@@ -9,8 +9,18 @@
 import UIKit
 
 class CalendarCell: UITableViewCell {
-    static let identifier = "CalendarControllerCell"
+   
     
+    var calendar: Calendar? {
+        didSet {
+            guard let postImageUrl = calendar?.user.profileImageUrl else { return }
+            personImage.loadImage(urlString: postImageUrl)
+            personName.text = calendar?.user.username
+            timeLabel.text = calendar!.start + " ~ " + calendar!.end
+            detailLabel.text = calendar?.event
+            lLabel.text = calendar?.location
+        }
+    }
     
     let personImage: CustomImageView = {
         let personImage = CustomImageView()
@@ -21,21 +31,27 @@ class CalendarCell: UITableViewCell {
     
     let personName: UILabel = {
         let personName = UILabel()
-        personName.text = "실험용"
+        personName.text = "daesiker"
         return personName
     }()
     
     let timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.text = "실험"
+        timeLabel.text = "09:00 ~ 12:00"
         timeLabel.font = UIFont.boldSystemFont(ofSize: 14)
         return timeLabel
     }()
     
     let detailLabel: UILabel = {
        let detailLabel = UILabel()
-        detailLabel.text = "dyd"
+        detailLabel.text = "버스킹"
         return detailLabel
+    }()
+    
+    let lLabel: UILabel = {
+       let lb = UILabel()
+        lb.text = "홍대 놀이터"
+        return lb
     }()
     
     
@@ -46,14 +62,15 @@ class CalendarCell: UITableViewCell {
         contentView.addSubview(personName)
         contentView.addSubview(timeLabel)
         contentView.addSubview(detailLabel)
+        contentView.addSubview(lLabel)
         
-        personImage.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        personImage.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
         personImage.layer.cornerRadius = 40 / 2
-        personName.anchor(top: self.topAnchor, left: personImage.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        personName.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: personImage.rightAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         timeLabel.anchor(top: personImage.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         detailLabel.anchor(top: personImage.bottomAnchor, left: timeLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
+        lLabel.anchor(top: detailLabel.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: timeLabel.frame.width, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
     }
     
