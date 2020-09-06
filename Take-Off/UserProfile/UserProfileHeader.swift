@@ -17,11 +17,9 @@ protocol UserProfileHeaderDelegate {
 class UserProfileHeader: UICollectionViewCell {
     
     var delegate: UserProfileHeaderDelegate?
-    
     var user: User? {
         didSet {
             guard let profileImageUrl = user?.profileImageUrl else { return }
-            
             profileImageView.loadImage(urlString: profileImageUrl)
             //setupProfileImage()
             usernameLabel.text = user?.username
@@ -148,7 +146,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let postsLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "3\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -158,9 +156,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let followersLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        label.attributedText = attributedText
+       
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -168,7 +164,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let followingLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "2\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -205,10 +201,40 @@ class UserProfileHeader: UICollectionViewCell {
         addSubview(editProfileFollowButton)
         editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: postsLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
     }
+    var peopleCount: Int?
+    func setupCounter() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.database().reference().child("following").observe(DataEventType.value) { (snapshot) in
+            guard let userIdsDictionary = snapshot.value as? [String: Any] else {return}
+            
+            //forEach == 반복문
+            userIdsDictionary.forEach { (key, value) in
+                print("팔로잉 : ", key)
+                //fetchUerWithUid = userIdsDictionary에 저장된 uid의 user정보를 가져와준다.
+                Database.database().reference().child("following").child(key).observeSingleEvent(of: .value) { (snapshot) in
+                    guard let userDictionary = snapshot.value as? [String: Any] else { return }
+                    var count = 0
+                    userDictionary.forEach { (key, value) in
+                        print("팔로잉2 : ", key)
+                        if key == uid {
+                            count += 1
+                        }
+                    }
+                    self.peopleCount = count
+                }
+            }
+            
+        }
+        
+    }
     
     fileprivate func setupUserStatsView() {
+        setupCounter()
+        print(self.peopleCount as Any)
         let stackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
-        
+        let attributedText = NSMutableAttributedString(string: "3\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+        followersLabel.attributedText = attributedText
         stackView.distribution = .fillEqually
         addSubview(stackView)
         stackView.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)

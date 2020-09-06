@@ -12,7 +12,7 @@ import Firebase
 
 class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
-    
+    fileprivate let imageName = ["태1.jpeg", "태2.jpeg", "태3.jpeg", "태4.jpeg"]
     var imageNames: Array<Any> = []
     fileprivate let adNames = ["광1.png", "광2.png", "광3.png"]
     
@@ -72,14 +72,15 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
     }()
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        if pagerView == hotPostView { return imageNames.count }
+        if pagerView == hotPostView { return imageName.count }
         else { return adNames.count }
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         if pagerView == hotPostView {
-            cell.imageView?.image = UIImage(named: self.imageNames[index] as! String)
+            //cell.imageView?.image = UIImage(named: self.imageNames[index] as! String)
+            cell.imageView?.image = UIImage(named: self.imageName[index])
             cell.imageView?.contentMode = .scaleAspectFill
         }
         else {
@@ -136,10 +137,10 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
         moreButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -15).isActive = true
         
         self.view.addSubview(hotPostView)
-        hotPostView.anchor(top: megazineLabel.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: self.view.frame.width, height: self.view.frame.height / 2)
+        hotPostView.anchor(top: megazineLabel.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 15, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: self.view.frame.width, height: self.view.frame.height / 2 + 40)
         
         self.view.addSubview(adView)
-        adView.anchor(top: hotPostView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
+        adView.anchor(top: hotPostView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: -5, paddingRight: 5, width: 0, height: 0)
     }
     
     @objc func handleSearch() {

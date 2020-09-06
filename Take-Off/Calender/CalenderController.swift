@@ -19,6 +19,9 @@ class CalenderController: UIViewController, UITableViewDelegate, UITableViewData
         let calendar = FSCalendar()
         calendar.dataSource = self
         calendar.delegate = self
+        calendar.appearance.headerTitleColor = .black
+        calendar.appearance.weekdayTextColor = .black
+        calendar.appearance.todayColor = .orange
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: "Cell")
         return calendar
     }()
@@ -77,7 +80,7 @@ class CalenderController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
     
     
@@ -118,7 +121,10 @@ class CalenderController: UIViewController, UITableViewDelegate, UITableViewData
                     self.fetchCalendersWithUser(user: user)
                 }
             }
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
         }) { (err) in
             print("Failed to fetch following user ids:", err)
         }

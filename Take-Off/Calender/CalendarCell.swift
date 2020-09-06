@@ -14,7 +14,7 @@ class CalendarCell: UITableViewCell {
     var calendar: Calendar? {
         didSet {
             guard let postImageUrl = calendar?.user.profileImageUrl else { return }
-            personImage.loadImage(urlString: postImageUrl)
+            personImage.loadImageUsingCacheWithUrlString(postImageUrl)
             personName.text = calendar?.user.username
             timeLabel.text = calendar!.start + " ~ " + calendar!.end
             detailLabel.text = calendar?.event
