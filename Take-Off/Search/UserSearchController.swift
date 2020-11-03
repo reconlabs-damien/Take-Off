@@ -71,26 +71,35 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     var filteredUsers = [User]()
     var users = [User]()
     fileprivate func fetchUsers() {
+        //users 테이블에 있는 데이터를 가져옴
         let ref = Database.database().reference().child("users")
+        //obserbeSingleEvent : users 테이블에 있는 데이터를 하나씩 꺼내오는 함수
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            // 가져온 데이터의 value를 딕셔너리 형태로 변환
             guard let dictionaries = snapshot.value as? [String: Any] else {return}
             
+            //key와 value로 나뉘어진 반복문
             dictionaries.forEach { (key, value) in
-                
+                //key가 현재 사용자의 uid가 아니라면 리턴
                 if key == Auth.auth().currentUser?.uid {
                     return
                 }
+                // value로 userDictionary로 변환
                 guard let userDictionary = value as? [String: Any] else { return }
                 
+                //가져온 데이터를 User 모델로 변환
                 let user = User(uid: key, dictionary: userDictionary)
+                //users 배열에 추가
                 self.users.append(user)
             }
             
+            //데이터를 이름순으로 정렬
             self.users.sort { (u1, u2) -> Bool in
                 return u1.username.compare(u2.username) == .orderedAscending
             }
             
             self.filteredUsers = self.users
+            //collectionView 테이블 초기화
             self.collectionView.reloadData()
             
         }) { (err) in

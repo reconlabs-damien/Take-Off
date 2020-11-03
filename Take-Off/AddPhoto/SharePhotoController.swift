@@ -57,18 +57,22 @@ class SharePhotoController: UIViewController {
     
     
     @objc func handleShare() {
+        //textView안에 택스트를 caption 상수로 정의
         guard let caption = textView.text, !caption.isEmpty else {return}
+        //게시물을 올릴 이미지 상수 정의
         guard let image = selectedImage else { return }
+        //이미지 데이터의 크기를 변환하여 처리해주는 함수
         guard let uploadData = image.jpegData(compressionQuality: 0.5) else {return}
         
         navigationItem.rightBarButtonItem?.isEnabled = false
         
         let filename = NSUUID().uuidString
-        
+        //Firebase Storage안에 있는 posts폴더를 지정
         let storageRef = Storage.storage().reference().child("posts").child(filename)
         
+        //putData : storage함수에 데이터를 집어넣어주는 함수
         storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
-            
+            //exception 처리
             if let err = err {
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
                 print("Failed to upload post image: ", err)
@@ -81,10 +85,11 @@ class SharePhotoController: UIViewController {
                     print("Failed to fetch downloadURL:", err)
                     return
                 }
-                
+                //이미지 파일을 스트링 파일로 변환후 데이터베이스에 삽입
                 guard let imageUrl = downloadURL?.absoluteString else { return }
                 print("Successfully uploaded post image:", imageUrl)
                 
+                //ImageUrl을 DB에 넣어주는 Extension함수
                 self.saveToDatabaseWithImageUrl(imageUrl: imageUrl)
             })
         }

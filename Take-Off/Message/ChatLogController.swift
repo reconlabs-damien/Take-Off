@@ -383,10 +383,10 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             
             let messageId = childRef.key
             
-            let userMessagesRef = Database.database().reference().child("user-messages").child(fromId).child(toId).child(messageId)
+            let userMessagesRef = Database.database().reference().child("user-messages").child(fromId).child(toId).child(messageId!)
             userMessagesRef.setValue(1)
             
-            let recipientUserMessagesRef = Database.database().reference().child("user-messages").child(toId).child(fromId).child(messageId)
+            let recipientUserMessagesRef = Database.database().reference().child("user-messages").child(toId).child(fromId).child(messageId!)
             recipientUserMessagesRef.setValue(1)
         }
     }

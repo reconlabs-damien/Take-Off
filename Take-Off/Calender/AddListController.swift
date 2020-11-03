@@ -7,37 +7,48 @@
 //
 
 import UIKit
-import TextFieldEffects
 import Firebase
+import OneSignal
 
 class AddListController: UIViewController {
     
-    let titleLabel: HoshiTextField = {
-        let tf = HoshiTextField()
-        tf.font = UIFont.systemFont(ofSize: 30)
+    let titleLabel: UITextField = {
+        let tf = UITextField()
+        tf.font = UIFont.systemFont(ofSize: 20)
         tf.placeholder = "제목"
-        tf.borderActiveColor = .black
-        tf.placeholderColor = .black
-        tf.placeholderFontScale = 0.5
+        tf.tintColor = .none
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
     let startDateLabel: UILabel = {
         let lb = UILabel()
+        lb.font = UIFont.systemFont(ofSize: 20)
+        lb.text = "시작"
+        return lb
+    }()
+    
+    let startDateTime: UIButton = {
+       let lb = UIButton()
         var formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateStyle = .none
         formatter.timeStyle = .short
         let time = formatter.string(from: Date())
-        lb.font = UIFont.systemFont(ofSize: 20)
-        lb.text = "시작 : " + time
+        let dateformatter = DateFormatter()
+        dateformatter.locale = Locale(identifier: "ko_KR")
+        dateformatter.dateFormat = "M월 d일"
+        let date = dateformatter.string(from: Date())
+        lb.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        lb.setTitle(date + " " + time, for: .normal)
+        lb.setTitleColor(.black, for: .normal)
+        //lb.addTarget(self, action: #selector(startShowPicker), for: .touchUpInside)
         return lb
     }()
     
-    let startPickerView: UIDatePicker = {
+    
+    fileprivate let startPickerView: UIDatePicker = {
         let dp = UIDatePicker()
-        
         //datePicker 모드 설정
         dp.datePickerMode = .dateAndTime
         //지역을 한국으로 설정
@@ -46,6 +57,7 @@ class AddListController: UIViewController {
         dp.date = Date()
         //애니메이션 효과 적용
         dp.setDate(Date(), animated: true)
+        dp.addTarget(self, action: #selector(startChangeTime), for: .valueChanged)
         return dp
     }()
     
@@ -57,7 +69,21 @@ class AddListController: UIViewController {
         formatter.timeStyle = .short
         let time = formatter.string(from: Date())
         lb.font = UIFont.systemFont(ofSize: 20)
-        lb.text = "종료 : " + time
+        lb.text = "종료"
+        return lb
+    }()
+    
+    let endDateTime: UIButton = {
+        let lb = UIButton()
+        var formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        let time = formatter.string(from: Date())
+        lb.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        lb.setTitle(time, for: .normal)
+        lb.setTitleColor(.black, for: .normal)
+        //lb.addTarget(self, action: #selector(endShowPicker), for: .touchUpInside)
         return lb
     }()
     
@@ -71,25 +97,37 @@ class AddListController: UIViewController {
         dp.date = Date()
         //애니메이션 효과 적용
         dp.setDate(Date(), animated: true)
+        dp.addTarget(self, action: #selector(endChangeTime), for: .valueChanged)
         return dp
     }()
     
-    let locationTextField: HoshiTextField = {
-        let tf = HoshiTextField()
-        tf.font = UIFont.systemFont(ofSize: 30)
+    var locationTextField: UITextField = {
+        let tf = UITextField()
+        tf.font = UIFont.systemFont(ofSize: 20)
         tf.placeholder = "장소"
-        tf.borderActiveColor = .black
-        tf.placeholderColor = .black
-        tf.placeholderFontScale = 0.5
+        tf.tintColor = .none
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
+    
+    let locationButton: UIButton = {
+        let bt = UIButton()
+        bt.setImage(UIImage(named: "map"), for: .normal)
+        bt.addTarget(self, action: #selector(handleLocationController), for: .touchUpInside)
+        return bt
+    }()
+    
+    @objc func handleLocationController() {
+        let locationCV = LocationSelectorController()
+        let navController = UINavigationController(rootViewController: locationCV)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true, completion: nil)
+    }
     
     let confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("공유", for: .normal)
         button.backgroundColor = UIColor.rgb(red: 250, green: 224, blue: 212)
-        
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
@@ -98,41 +136,43 @@ class AddListController: UIViewController {
         return button
     }()
     
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let cc = CalenderController()
-        navigationItem.title = cc.headTitle.text
         view.addSubview(titleLabel)
         view.addSubview(startDateLabel)
-        view.addSubview(startPickerView)
-        view.addSubview(endDateLabel)
-        view.addSubview(endPickerView)
-        view.addSubview(locationTextField)
-        view.addSubview(confirmButton)
-        startPickerView.addTarget(self, action: #selector(startChangeTime), for: .valueChanged)
-        endPickerView.addTarget(self, action: #selector(endChangeTime), for: .valueChanged)
-        
+        view.addSubview(startDateTime)
         
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: view.frame.width, height: 60)
+        startDateLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        startDateTime.anchor(top: titleLabel.bottomAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
         
-        startDateLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0)
-        
-        startPickerView.anchor(top: startDateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 1, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0)
-        
-        endDateLabel.anchor(top: startPickerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 1, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0)
-        
-        endPickerView.anchor(top: endDateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 1, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0)
-        
-        locationTextField.anchor(top: endPickerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: view.frame.width, height: 60)
-        
-        confirmButton.anchor(top: locationTextField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: view.frame.width, height: 0)
+        view.addSubview(startPickerView)
+        startPickerView.anchor(top: startDateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
         
         
+        view.addSubview(endDateLabel)
+        view.addSubview(endDateTime)
+        endDateLabel.anchor(top: startPickerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        endDateTime.anchor(top: startPickerView.bottomAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
         
+        
+        view.addSubview(endPickerView)
+        endPickerView.anchor(top: endDateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
+        
+        view.addSubview(locationTextField)
+        view.addSubview(locationButton)
+        view.addSubview(confirmButton)
+        
+        locationButton.anchor(top: endPickerView.bottomAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 20, height: 20)
+        locationTextField.anchor(top: endPickerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: locationButton.leftAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
+        
+        confirmButton.anchor(top: locationTextField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
+        
+        setupNavigationItems()
     }
+    
     
     @objc func startChangeTime() {
         let time = startPickerView.date
@@ -141,14 +181,11 @@ class AddListController: UIViewController {
         timeFormatter.timeStyle = .short
         timeFormatter.locale = Locale(identifier: "ko_KR")
         let result1 = timeFormatter.string(from: time)
-        
         let dateformatter = DateFormatter()
         dateformatter.locale = Locale(identifier: "ko_KR")
         dateformatter.dateFormat = "M월 d일"
         let now = dateformatter.string(from: time)
-        
-        self.navigationItem.title = now
-        startDateLabel.text = "시작 : " + result1
+        startDateTime.titleLabel?.text = now + " " + result1
         
     }
     
@@ -159,7 +196,7 @@ class AddListController: UIViewController {
         formatter.timeStyle = .short
         formatter.locale = Locale(identifier: "ko_KR")
         let result = formatter.string(from: time)
-        endDateLabel.text = "종료 : " + result
+        endDateTime.titleLabel?.text = result
         
     }
     
@@ -175,30 +212,39 @@ class AddListController: UIViewController {
         }
     }
     
+    func setupNavigationItems() {
+        //왼쪽 버튼 설정
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_shadow"), style: .plain, target: self, action: #selector(handleCancel))
+        //왼쪽 버튼 컬러지정
+        navigationItem.leftBarButtonItem?.tintColor = .black
+    }
+    
+    @objc func handleCancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @objc func postList() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let location = locationTextField.text else { return }
         guard let event = titleLabel.text else { return }
-        guard let dday = navigationItem.title else { return }
-        guard let startTmp = startDateLabel.text else { return }
-        guard let endTmp = endDateLabel.text else { return }
+        guard let startTmp = startDateTime.titleLabel?.text else { return }
+        guard let endTmp = endDateTime.titleLabel?.text else { return }
         
-        let start = startTmp.dropFirst(5)
-        let end = endTmp.dropFirst(5)
+        let dday = startTmp.dropLast(8)
+        let start = startTmp.dropFirst(7)
         let userCalendarRef = Database.database().reference().child("calendars").child(uid)
         let ref = userCalendarRef.childByAutoId()
-        
-        let values = ["event": event, "location": location, "dday": dday, "start": start, "end": end] as [String: Any]
+        let values = ["user": uid, "event": event, "location": location, "dday": dday, "start": start, "end": endTmp] as [String: Any]
         ref.updateChildValues(values) { (err, ref) in
             if let err = err {
                 print("calendar DB error", err)
                 return
             }
             print("Successfully saved calendar to DB")
-            self.dismiss(animated: true, completion: nil)
+            OneSignal.promptForPushNotifications(userResponse: { accepted in
+                print(uid)
+            })
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
-        
     }
-    
 }

@@ -16,9 +16,23 @@ protocol UserProfileHeaderDelegate {
 
 class UserProfileHeader: UICollectionViewCell {
     
+    var followerCount = 3
+    var followingCount = 2
+    var postsCount = 4
     var delegate: UserProfileHeaderDelegate?
     var user: User? {
         didSet {
+            let attributedText2 = NSMutableAttributedString(string: String(postsCount) + "\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText2.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+            postsLabel.attributedText = attributedText2
+            
+            let attributedText1 = NSMutableAttributedString(string: String(followingCount) + "\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText1.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+            followingLabel.attributedText = attributedText1
+            
+            let attributedText = NSMutableAttributedString(string: String(followerCount) + "\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+            followersLabel.attributedText = attributedText
             guard let profileImageUrl = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             //setupProfileImage()
@@ -146,9 +160,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let postsLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "3\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        label.attributedText = attributedText
+        
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -164,9 +176,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     let followingLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "2\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        label.attributedText = attributedText
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -201,40 +210,55 @@ class UserProfileHeader: UICollectionViewCell {
         addSubview(editProfileFollowButton)
         editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: postsLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
     }
-    var peopleCount: Int?
+    
+    
+    //팔로워수, 팔로잉수, 게시물수를 설정하는 함수
     func setupCounter() {
+        // 현재 사용자 uid를 상수로 지정
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("following").observe(DataEventType.value) { (snapshot) in
-            guard let userIdsDictionary = snapshot.value as? [String: Any] else {return}
+        
+        //posts 테이블에 uid가 같은 튜플만 가져옴
+        Database.database().reference().child("posts").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            //snapshot의 value값을 userIdsDictionary 자료형으로 변환
+            guard let userIdsDictionary = snapshot.value as? [String : Any] else { return }
+            //postsCount를 userIdsDictionary의 키의 개수로 변경
+            self.postsCount = userIdsDictionary.keys.count
+        }, withCancel: nil)
+        
+        //같은 형식으로 following테이블을 가져옴
+        Database.database().reference().child("following").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            //forEach == 반복문
-            userIdsDictionary.forEach { (key, value) in
-                print("팔로잉 : ", key)
-                //fetchUerWithUid = userIdsDictionary에 저장된 uid의 user정보를 가져와준다.
-                Database.database().reference().child("following").child(key).observeSingleEvent(of: .value) { (snapshot) in
-                    guard let userDictionary = snapshot.value as? [String: Any] else { return }
-                    var count = 0
-                    userDictionary.forEach { (key, value) in
-                        print("팔로잉2 : ", key)
-                        if key == uid {
-                            count += 1
+            guard let userIdsDictionary = snapshot.value as? [String : Any] else { return }
+            for key in userIdsDictionary.keys {
+                //key가 uid와 같음면 following 수를 가져온다.
+                if key == uid {
+                    // 그 테이블로 들어가서 value의 개수를 가져온다.
+                    Database.database().reference().child("following").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                        guard let followingDictionary = snapshot.value as? [String : Any] else { return }
+                        self.followingCount = followingDictionary.keys.count
+                    }, withCancel: nil)
+                }
+                //아니면 follower의 수를 가져온다.
+                else {
+                    Database.database().reference().child("following").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                         guard let followerDictionary = snapshot.value as? [String : Any] else { return }
+                        for fkey in followerDictionary.keys {
+                            if fkey == uid {
+                                self.followerCount += 1
+                            }
                         }
-                    }
-                    self.peopleCount = count
+                    }, withCancel: nil)
                 }
             }
             
-        }
+        }, withCancel: nil)
+            
         
     }
     
     fileprivate func setupUserStatsView() {
         setupCounter()
-        print(self.peopleCount as Any)
         let stackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
-        let attributedText = NSMutableAttributedString(string: "3\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        followersLabel.attributedText = attributedText
         stackView.distribution = .fillEqually
         addSubview(stackView)
         stackView.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)

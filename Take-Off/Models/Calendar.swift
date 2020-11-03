@@ -9,15 +9,15 @@
 import Foundation
 
 struct Calendar {
-    let user: User
-    let dday: String
-    let event: String
-    let start: String
-    let end: String
-    let location: String
+    var user: String
+    var dday: String
+    var event: String
+    var start: String
+    var end: String
+    var location: String
     
-    init(user: User, dictionary: [String: Any]) {
-        self.user = user
+    init(dictionary: [String: Any]) {
+        self.user = dictionary["user"] as? String ?? ""
         self.dday = dictionary["dday"] as? String ?? ""
         self.event = dictionary["event"] as? String ?? ""
         self.start = dictionary["start"] as? String ?? ""

@@ -7,18 +7,35 @@
 //
 
 import UIKit
+import Firebase
 
 class CalendarCell: UITableViewCell {
    
     
     var calendar: Calendar? {
         didSet {
-            guard let postImageUrl = calendar?.user.profileImageUrl else { return }
-            personImage.loadImageUsingCacheWithUrlString(postImageUrl)
-            personName.text = calendar?.user.username
-            timeLabel.text = calendar!.start + " ~ " + calendar!.end
-            detailLabel.text = calendar?.event
-            lLabel.text = calendar?.location
+            setupNameAndProfileImage()
+            timeLabel.text = "시 간 : " + calendar!.start + " ~ " + calendar!.end
+            detailLabel.text = "내 용 : " + calendar!.event
+            lLabel.text = "장 소 : " + calendar!.location
+        }
+    }
+    
+    fileprivate func setupNameAndProfileImage() {
+        
+        if let id = calendar?.user {
+            let ref = Database.database().reference().child("users").child(id)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: Any] {
+                    self.personName.text = dictionary["username"] as? String
+                    
+                    if let profileImageUrl = dictionary["profileImageUrl"] as? String {
+                        self.personImage.loadImageUsingCacheWithUrlString(profileImageUrl)
+                    }
+                }
+                
+                }, withCancel: nil)
         }
     }
     
@@ -45,12 +62,14 @@ class CalendarCell: UITableViewCell {
     let detailLabel: UILabel = {
        let detailLabel = UILabel()
         detailLabel.text = "버스킹"
+        detailLabel.font = UIFont.boldSystemFont(ofSize: 14)
         return detailLabel
     }()
     
     let lLabel: UILabel = {
        let lb = UILabel()
         lb.text = "홍대 놀이터"
+        lb.font = UIFont.boldSystemFont(ofSize: 14)
         return lb
     }()
     
@@ -66,11 +85,11 @@ class CalendarCell: UITableViewCell {
         
         personImage.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
         personImage.layer.cornerRadius = 40 / 2
-        personName.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: personImage.rightAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        personName.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: personImage.rightAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         timeLabel.anchor(top: personImage.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        detailLabel.anchor(top: personImage.bottomAnchor, left: timeLabel.rightAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        lLabel.anchor(top: detailLabel.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: timeLabel.frame.width, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        detailLabel.anchor(top: timeLabel.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        lLabel.anchor(top: detailLabel.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
     }
     

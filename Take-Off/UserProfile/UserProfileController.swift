@@ -41,19 +41,23 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         //fetchOrderedPosts()
     }
+    
     var isFinishedPaging = false
     var posts = [Post]()
     
+    //게시물의 보기형식을 변경하는 함수
     fileprivate func paginatePosts() {
+        //uid 상수 정의
         guard let uid = self.user?.uid else { return }
+        //posts 테이블에서 사용자 uid에 관한 테이블을 상수로 지정
         let ref = Database.database().reference().child("posts").child(uid)
-//        let value = ""
-//        let query = ref.queryOrderedByKey().queryStarting(atValue: value).queryLimited(toFirst: 6)
-        
+        //creationDate속성을 통해 정렬
         var query = ref.queryOrdered(byChild: "creationDate")
         
+        // post의 개수가 0보다 크면
         if posts.count > 0 {
             //let value = posts.last?.id
+            //날짜형식을 timeIntervalSince1970으로 지정
             let value = posts.last?.creationDate.timeIntervalSince1970
             query = query.queryEnding(atValue: value)
         }

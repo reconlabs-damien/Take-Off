@@ -5,7 +5,6 @@
 //  Created by Jun on 2020/06/18.
 //  Copyright © 2020 Jun. All rights reserved.
 //
-
 import UIKit
 import Firebase
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
@@ -31,7 +30,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     return rhs < lhs
   }
 }
-
 
 class MessagesController: UITableViewController {
 
@@ -68,14 +66,8 @@ class MessagesController: UITableViewController {
                     print("Failed to delete message:", error!)
                     return
                 }
-                
                 self.messagesDictionary.removeValue(forKey: chatPartnerId)
                 self.attemptReloadOfTable()
-                
-                //                //this is one way of updating the table, but its actually not that safe..
-                //                self.messages.removeAtIndex(indexPath.row)
-                //                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                
             })
         }
     }
@@ -84,7 +76,6 @@ class MessagesController: UITableViewController {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        
         let ref = Database.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
             
@@ -103,10 +94,8 @@ class MessagesController: UITableViewController {
         let messagesReference = Database.database().reference().child("messages").child(messageId)
         
         messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
-            
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let message = Message(dictionary: dictionary)
-                
                 if let chatPartnerId = message.chatPartnerId() {
                     self.messagesDictionary[chatPartnerId] = message
                 }
@@ -147,7 +136,6 @@ class MessagesController: UITableViewController {
         
         let message = messages[indexPath.row]
         cell.message = message
-        
         return cell
     }
     
@@ -190,25 +178,25 @@ class MessagesController: UITableViewController {
     }
     
     func fetchUserAndSetupNavBarTitle() {
+        // 현재 사용자의 uid를 가져옴
         guard let uid = Auth.auth().currentUser?.uid else {
             //for some reason uid = nil
             return
         }
         
+        // Users 테이블에 있는 uid 테이블을 가져와서 안에 있는 데이터를 하나씩 실행
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
+            //uid안에 있는 value값을 딕셔너리형태로 변환
             guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
-            
+            //key = uid
             let key = snapshot.key
+            //해당 key로 User 모델을 만듬
             let user = User(uid: key, dictionary: dictionary)
+            //user 모델을 통해 setupNavbarWithUser 함수 실행
+            //setupNavBarWithUser : 해당 사용자와 메세지를 했던 사용자들의 정보를 테이블뷰에 표시하는 메서드
             self.setupNavBarWithUser(user)
-//            dictionary.forEach { (key, value) in
-//                guard let userDictionary = value as? [String: Any] else { return }
-//                let user = User(uid: key, dictionary: userDictionary)
-//                self.setupNavBarWithUser(user)
-//            }
-//                self.navigationItem.title = dictionary["name"] as? String
-                
+
             }, withCancel: nil)
     }
     

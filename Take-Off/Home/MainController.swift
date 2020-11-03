@@ -10,27 +10,69 @@ import UIKit
 import FSPagerView
 import Firebase
 
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     fileprivate let imageName = ["태1.jpeg", "태2.jpeg", "태3.jpeg", "태4.jpeg"]
-    var imageNames: Array<Any> = []
+    var imageNames: [UIImage] = []
     fileprivate let adNames = ["광1.png", "광2.png", "광3.png"]
     
     func uploadNewPost() {
+        //파이어베이스 Storage안에 posts 폴더를 ref란 상수에 정의
         let ref = Storage.storage().reference().child("posts/")
-        ref.getData(maxSize: 1 * 1024 * 1024) { (data, err) in
-            if let err = err {
-                print(err)
+        //listAll : 해당 폴더안에 있는 파일들을 전부 가져와 주는 함수
+        ref.listAll.self { (result, error) in
+            //exception처리 하는 코드
+            if let error = error {
+                print("에러", error)
                 return
             }
-            let image = UIImage(data: data!)
-            self.imageNames.append(image as Any)
-            if self.imageNames.count == 5 {
-                return
+            //5개의 파일만 가져오므로 반복문을 통해 5개만 가져올수있도록 하는 코드
+            for i in 0...5 {
+                //getData : 폴더안에 있는 파일을 업로드하는 함수
+                result.items[i].getData(maxSize: 1 * 1024 * 1024) { (data, err) in
+                    if let err = err {
+                            print(err)
+                            return
+                    }
+                    // 가져온 파일을 UIImage로 만듬
+                    let image = UIImage(data: data!)
+                        // 이미지 배열에 해당 이미지 append
+                        self.imageNames.append(image!)
+                        //이미지 배열의 갯수가 5개면 리턴
+                        if self.imageNames.count == 5 {
+                            return
+                    }
+                }
+            }
+            //비동기 통신방식을 동기로 바꾸기위한 함수
+            DispatchQueue.main.async {
+                //바뀐 이미지 배열을 화면에 표시할 수 있도록 리로드
+                self.hotPostView.reloadData()
             }
         }
     }
-    
     
     private lazy var hotPostView: FSPagerView = {
         let pagerView = FSPagerView()
@@ -72,15 +114,17 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
     }()
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        if pagerView == hotPostView { return imageName.count }
+        uploadNewPost()
+        if pagerView == hotPostView { return self.imageNames.count }
         else { return adNames.count }
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        uploadNewPost()
         if pagerView == hotPostView {
             //cell.imageView?.image = UIImage(named: self.imageNames[index] as! String)
-            cell.imageView?.image = UIImage(named: self.imageName[index])
+            cell.imageView?.image = self.imageNames[index]
             cell.imageView?.contentMode = .scaleAspectFill
         }
         else {
@@ -104,6 +148,7 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
 
     override func viewDidLoad() {
         uploadNewPost()
+        print(self.imageNames)
         setupNavigationItems()
         self.view.backgroundColor = .white
         view.addSubview(backgroundView)
@@ -116,7 +161,7 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
         searchBarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         searchBarButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
         searchBarButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
-        
+
         let megazineLabel = UILabel()
         megazineLabel.text = "Today's Hottest🔥"
         megazineLabel.textColor = .black
