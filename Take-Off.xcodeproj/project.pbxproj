@@ -56,9 +56,7 @@
 		BF906BF8249B0DDE00BCB364 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BF7249B0DDE00BCB364 /* ChatMessageCell.swift */; };
 		BF906BFA249B0ED500BCB364 /* ChatInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BF9249B0ED500BCB364 /* ChatInputContainerView.swift */; };
 		BF906BFC249B32DD00BCB364 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF906BFB249B32DD00BCB364 /* MainController.swift */; };
-		BFBB78B425515E4900918806 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB78B325515E4900918806 /* NotificationService.swift */; };
-		BFBB78B825515E4900918806 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BFBB78B125515E4900918806 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BFC89F34249B8172009A4825 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFC89F33249B8172009A4825 /* GoogleService-Info.plist */; };
+		BFB3B50A2558FD0F0072784D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB3B5092558FD0F0072784D /* GoogleService-Info.plist */; };
 		BFDAC65424FBC5530011786A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC65324FBC5530011786A /* Calendar.swift */; };
 		BFDED7C42530657500CDF5F1 /* net.daum.MobileMap.docset in Resources */ = {isa = PBXBuildFile; fileRef = BFDED6A52530657400CDF5F1 /* net.daum.MobileMap.docset */; };
 		BFDED7C52530657500CDF5F1 /* setupDocsetDocument.rb in Resources */ = {isa = PBXBuildFile; fileRef = BFDED6A62530657400CDF5F1 /* setupDocsetDocument.rb */; };
@@ -333,38 +331,12 @@
 		BFDED8D22530657600CDF5F1 /* interface_m_t_map_point-members.html in Resources */ = {isa = PBXBuildFile; fileRef = BFDED7C12530657500CDF5F1 /* interface_m_t_map_point-members.html */; };
 		BFDED8D32530657600CDF5F1 /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = BFDED7C22530657500CDF5F1 /* jquery.js */; };
 		BFDED8D42530657600CDF5F1 /* changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFDED7C32530657500CDF5F1 /* changelog.txt */; };
-		BFDED8D62530668100CDF5F1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDED8D52530668100CDF5F1 /* OpenGLES.framework */; };
 		BFDED8D8253066C900CDF5F1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDED8D7253066C900CDF5F1 /* SystemConfiguration.framework */; };
 		BFDED8DA253066D100CDF5F1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDED8D9253066D100CDF5F1 /* CoreLocation.framework */; };
 		BFDED8DC253066DB00CDF5F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDED8DB253066DB00CDF5F1 /* QuartzCore.framework */; };
 		BFDED8E12530683B00CDF5F1 /* LocationSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDED8E02530683B00CDF5F1 /* LocationSelectorController.swift */; };
 		BFEC6FD624F3E44B006BA07E /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEC6FD524F3E44B006BA07E /* CalendarCell.swift */; };
-		D21055BC9AFC94DADA41BB56 /* Pods_Take_Off_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B18ADE6333BCB461FD84AD18 /* Pods_Take_Off_OneSignalNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BFBB78B625515E4900918806 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF661661248FA8D30072A6F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BFBB78B025515E4900918806;
-			remoteInfo = OneSignalNotificationServiceExtension;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		BFBB78B925515E4900918806 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				BFBB78B825515E4900918806 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		101FF47FF33F44D25F34BBCB /* Pods-Take-Off.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Take-Off.release.xcconfig"; path = "Target Support Files/Pods-Take-Off/Pods-Take-Off.release.xcconfig"; sourceTree = "<group>"; };
@@ -376,6 +348,8 @@
 		BF3674CA253DB45900FD1C73 /* AqiResponseString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AqiResponseString.swift; sourceTree = "<group>"; };
 		BF3674CC253DB4B900FD1C73 /* AqiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AqiService.swift; sourceTree = "<group>"; };
 		BF3674CE253DB5DE00FD1C73 /* WeatherResponseString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponseString.swift; sourceTree = "<group>"; };
+		BF3A9CAA25590D7F00A5C8F5 /* Take-OffRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Take-OffRelease.entitlements"; sourceTree = "<group>"; };
+		BF3A9CAC25590DB200A5C8F5 /* Take-Off.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "Take-Off.entitlements"; path = "Take-Off/Take-Off.entitlements"; sourceTree = "<group>"; };
 		BF62481F249C4B4A00C1B4A9 /* CalenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderController.swift; sourceTree = "<group>"; };
 		BF661669248FA8D30072A6F9 /* Take-Off.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Take-Off.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF66166C248FA8D30072A6F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -422,12 +396,9 @@
 		BF906BF7249B0DDE00BCB364 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		BF906BF9249B0ED500BCB364 /* ChatInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputContainerView.swift; sourceTree = "<group>"; };
 		BF906BFB249B32DD00BCB364 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		BFB5522424D10D9400E9748C /* Take-OffRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Take-OffRelease.entitlements"; sourceTree = "<group>"; };
-		BFBB78B125515E4900918806 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB3B5092558FD0F0072784D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BFBB78B325515E4900918806 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		BFBB78B525515E4900918806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BFBB78BD255167F200918806 /* Take-Off.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Take-Off.entitlements"; sourceTree = "<group>"; };
-		BFC89F33249B8172009A4825 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BFDAC65324FBC5530011786A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		BFDED6A52530657400CDF5F1 /* net.daum.MobileMap.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = net.daum.MobileMap.docset; sourceTree = "<group>"; };
 		BFDED6A62530657400CDF5F1 /* setupDocsetDocument.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = setupDocsetDocument.rb; sourceTree = "<group>"; };
@@ -732,15 +703,6 @@
 				BFDED8DC253066DB00CDF5F1 /* QuartzCore.framework in Frameworks */,
 				158BCA779D831E335E422673 /* Pods_Take_Off.framework in Frameworks */,
 				BFDED8D8253066C900CDF5F1 /* SystemConfiguration.framework in Frameworks */,
-				BFDED8D62530668100CDF5F1 /* OpenGLES.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BFBB78AE25515E4900918806 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D21055BC9AFC94DADA41BB56 /* Pods_Take_Off_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,6 +773,8 @@
 			isa = PBXGroup;
 			children = (
 				BF66166B248FA8D30072A6F9 /* Take-Off */,
+				BF3A9CAC25590DB200A5C8F5 /* Take-Off.entitlements */,
+				BF3A9CAA25590D7F00A5C8F5 /* Take-OffRelease.entitlements */,
 				BFBB78B225515E4900918806 /* OneSignalNotificationServiceExtension */,
 				BF66166A248FA8D30072A6F9 /* Products */,
 				0AE084C2ED6205F4C7480BB6 /* Pods */,
@@ -822,7 +786,6 @@
 			isa = PBXGroup;
 			children = (
 				BF661669248FA8D30072A6F9 /* Take-Off.app */,
-				BFBB78B125515E4900918806 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -830,9 +793,7 @@
 		BF66166B248FA8D30072A6F9 /* Take-Off */ = {
 			isa = PBXGroup;
 			children = (
-				BFBB78BD255167F200918806 /* Take-Off.entitlements */,
 				BF50606424E3BFDE003F6BC0 /* Resources */,
-				BFB5522424D10D9400E9748C /* Take-OffRelease.entitlements */,
 				BF62481E249C4B3700C1B4A9 /* Calender */,
 				BF906BEC249AEFC600BCB364 /* Message */,
 				BF6616B3248FAF800072A6F9 /* Camera */,
@@ -850,7 +811,7 @@
 				BF661672248FA8D30072A6F9 /* Main.storyboard */,
 				BF661677248FA8D70072A6F9 /* LaunchScreen.storyboard */,
 				BF66167A248FA8D70072A6F9 /* Info.plist */,
-				BFC89F33249B8172009A4825 /* GoogleService-Info.plist */,
+				BFB3B5092558FD0F0072784D /* GoogleService-Info.plist */,
 			);
 			path = "Take-Off";
 			sourceTree = "<group>";
@@ -1318,35 +1279,15 @@
 				BF661666248FA8D30072A6F9 /* Frameworks */,
 				BF661667248FA8D30072A6F9 /* Resources */,
 				91B82CCFDF468ED9400487E0 /* [CP] Embed Pods Frameworks */,
-				BFBB78B925515E4900918806 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BFBB78B725515E4900918806 /* PBXTargetDependency */,
 			);
 			name = "Take-Off";
 			productName = "Take-Off";
 			productReference = BF661669248FA8D30072A6F9 /* Take-Off.app */;
 			productType = "com.apple.product-type.application";
-		};
-		BFBB78B025515E4900918806 /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BFBB78BC25515E4900918806 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				5A63D5CB4E97A5BE575CE3B3 /* [CP] Check Pods Manifest.lock */,
-				BFBB78AD25515E4900918806 /* Sources */,
-				BFBB78AE25515E4900918806 /* Frameworks */,
-				BFBB78AF25515E4900918806 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = BFBB78B125515E4900918806 /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -1359,9 +1300,6 @@
 				ORGANIZATIONNAME = Jun;
 				TargetAttributes = {
 					BF661668248FA8D30072A6F9 = {
-						CreatedOnToolsVersion = 11.4;
-					};
-					BFBB78B025515E4900918806 = {
 						CreatedOnToolsVersion = 11.4;
 					};
 				};
@@ -1380,7 +1318,6 @@
 			projectRoot = "";
 			targets = (
 				BF661668248FA8D30072A6F9 /* Take-Off */,
-				BFBB78B025515E4900918806 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1585,7 +1522,6 @@
 				BFDED8492530657500CDF5F1 /* variables_2.html in Resources */,
 				BFDED8552530657500CDF5F1 /* all_9.js in Resources */,
 				BF6828D224ECF61C008916B1 /* 광3.png in Resources */,
-				BFC89F34249B8172009A4825 /* GoogleService-Info.plist in Resources */,
 				BFDED8282530657500CDF5F1 /* all_4.html in Resources */,
 				BFDED8B32530657600CDF5F1 /* classes.html in Resources */,
 				BFDED8362530657500CDF5F1 /* functions_6.js in Resources */,
@@ -1654,6 +1590,7 @@
 				BFDED81D2530657500CDF5F1 /* functions_func.html in Resources */,
 				BFDED8342530657500CDF5F1 /* variables_4.html in Resources */,
 				BFDED8B92530657600CDF5F1 /* menudata.js in Resources */,
+				BFB3B50A2558FD0F0072784D /* GoogleService-Info.plist in Resources */,
 				BFDED8912530657500CDF5F1 /* functions_b.html in Resources */,
 				BFDED7D82530657500CDF5F1 /* point_sprite.png in Resources */,
 				BFDED85A2530657500CDF5F1 /* functions_1.html in Resources */,
@@ -1672,38 +1609,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BFBB78AF25515E4900918806 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5A63D5CB4E97A5BE575CE3B3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Take-Off-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		91B82CCFDF468ED9400487E0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1798,23 +1706,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BFBB78AD25515E4900918806 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BFBB78B425515E4900918806 /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BFBB78B725515E4900918806 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BFBB78B025515E4900918806 /* OneSignalNotificationServiceExtension */;
-			targetProxy = BFBB78B625515E4900918806 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BF661672248FA8D30072A6F9 /* Main.storyboard */ = {
@@ -1954,7 +1846,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8853C64D6F6A3DE792A0E2AB /* Pods-Take-Off.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "Take-Off/Take-Off.entitlements";
@@ -1966,6 +1857,7 @@
 					"$(PROJECT_DIR)/IOS_DaumMap_SDK_1.4.0/lib/DaumMap.embeddedframework",
 				);
 				INFOPLIST_FILE = "Take-Off/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1982,11 +1874,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 101FF47FF33F44D25F34BBCB /* Pods-Take-Off.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "Take-Off/Take-OffRelease.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GX47BK9CV6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1994,6 +1885,7 @@
 					"$(PROJECT_DIR)/IOS_DaumMap_SDK_1.4.0/lib/DaumMap.embeddedframework",
 				);
 				INFOPLIST_FILE = "Take-Off/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2001,48 +1893,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Take-Off";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		BFBB78BA25515E4900918806 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15DCD0FED5F6495BED764208 /* Pods-Take-Off-OneSignalNotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GX47BK9CV6;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Take-Off.OneSignalNotificationServiceExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		BFBB78BB25515E4900918806 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA46258CA661AE39DDD5ACC6 /* Pods-Take-Off-OneSignalNotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GX47BK9CV6;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Take-Off.OneSignalNotificationServiceExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2065,15 +1915,6 @@
 			buildConfigurations = (
 				BF66167E248FA8D70072A6F9 /* Debug */,
 				BF66167F248FA8D70072A6F9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BFBB78BC25515E4900918806 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BFBB78BA25515E4900918806 /* Debug */,
-				BFBB78BB25515E4900918806 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

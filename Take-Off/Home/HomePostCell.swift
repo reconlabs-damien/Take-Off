@@ -65,6 +65,7 @@ class HomePostCell: UICollectionViewCell {
     let usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "Username"
+        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
@@ -113,6 +114,7 @@ class HomePostCell: UICollectionViewCell {
     
     let captionLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.numberOfLines = 0
         return label
     }()

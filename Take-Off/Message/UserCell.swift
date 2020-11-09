@@ -16,7 +16,7 @@ class UserCell: UITableViewCell {
             setupNameAndProfileImage()
             
             detailTextLabel?.text = message?.text
-            
+            detailTextLabel?.textColor = .black
             if let seconds = message?.timestamp?.doubleValue {
                 let timestampDate = Date(timeIntervalSince1970: seconds)
                 
@@ -51,7 +51,7 @@ class UserCell: UITableViewCell {
         super.layoutSubviews()
         
         textLabel?.frame = CGRect(x: 64, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        
+        textLabel?.textColor = .black
         detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
     }
     
@@ -75,6 +75,7 @@ class UserCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .white
         addSubview(profileImageView)
         addSubview(timeLabel)
         

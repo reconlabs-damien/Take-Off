@@ -121,7 +121,6 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
-        uploadNewPost()
         if pagerView == hotPostView {
             //cell.imageView?.image = UIImage(named: self.imageNames[index] as! String)
             cell.imageView?.image = self.imageNames[index]

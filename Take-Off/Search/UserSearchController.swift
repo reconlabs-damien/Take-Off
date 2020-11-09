@@ -15,6 +15,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         let sb = UISearchBar()
         sb.placeholder = "Enter username"
         sb.barTintColor = .gray
+        
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.rgb(red: 230, green: 230, blue: 230)
         sb.delegate = self
         return sb
@@ -42,7 +43,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         navigationController?.navigationBar.addSubview(searchBar)
         
         let navBar = navigationController?.navigationBar
-        
+        searchBar.backgroundColor = .white
         searchBar.anchor(top: navBar?.topAnchor, left: navBar?.leftAnchor, bottom: navBar?.bottomAnchor, right: navBar?.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
         
         collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: cellId)

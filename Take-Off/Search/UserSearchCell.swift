@@ -30,6 +30,7 @@ class UserSearchCell: UICollectionViewCell {
     let usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "Username"
+        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()

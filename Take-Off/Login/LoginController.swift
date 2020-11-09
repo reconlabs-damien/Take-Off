@@ -37,6 +37,7 @@ class LoginController: UIViewController {
         tf.placeholderColor = UIColor.rgb(red: 255, green: 85, blue: 54)
         tf.borderActiveColor = UIColor.rgb(red: 255, green: 85, blue: 54)
         tf.font = UIFont.systemFont(ofSize: 14)
+        tf.textColor = .black
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
@@ -45,6 +46,7 @@ class LoginController: UIViewController {
         let tf = HoshiTextField()
         tf.placeholder = "Password"
         tf.isSecureTextEntry = true
+        tf.textColor = .black
         tf.placeholderColor = UIColor.rgb(red: 255, green: 85, blue: 54)
         tf.borderActiveColor = UIColor.rgb(red: 255, green: 85, blue: 54)
         tf.font = UIFont.systemFont(ofSize: 14)

@@ -8,64 +8,40 @@
 
 import UIKit
 import Firebase
-import OneSignal
+import FirebaseMessaging
+import UserNotifications
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
         
-        OneSignal.initWithLaunchOptions(launchOptions,
-        appId: "10e81f5f-295c-4724-8765-5d11b1346835",
-        handleNotificationAction: nil,
-        settings: onesignalInitSettings)
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-        print("User accepted notifications: \(accepted)")
-        })
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in }
+        application.registerForRemoteNotifications()
         return true
     }
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Registered with FCM with token:", fcmToken)
-    }
-    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("Registered for notification:", deviceToken)
+        Messaging.messaging().apnsToken = deviceToken
     }
     
-    private func attemptRegisterForNotifications(application: UIApplication) {
-        print("Attempting to register APNS...")
-        
-        Messaging.messaging().delegate = self
-        
-        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, err) in
-            if let err = err {
-                print("Failed to request auth:", err)
-                return
-            }
-            if granted {
-                print("Auth granted")
-            } else {
-                print("Auth denied")
-            }
-        }
-        
-        application.registerForRemoteNotifications()
-    }
     // MARK: UISceneSession Lifecycle
-
+    @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    @available(iOS 13.0, *)
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
@@ -75,3 +51,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    completionHandler(.alert)
+    print("\(#function)")
+  }
+
+}
+
+extension AppDelegate: MessagingDelegate {
+    
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    let dataDict: [String: String] = ["token": fcmToken]
+    NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+    print("Registered with FCM with token:", fcmToken)
+
+  }
+  
+    
+    
+}

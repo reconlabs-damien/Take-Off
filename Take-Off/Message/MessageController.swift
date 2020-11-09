@@ -42,6 +42,7 @@ class MessagesController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
         navigationItem.rightBarButtonItem?.tintColor = .orange
         
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         fetchUserAndSetupNavBarTitle()

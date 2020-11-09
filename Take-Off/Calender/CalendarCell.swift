@@ -48,12 +48,14 @@ class CalendarCell: UITableViewCell {
     
     let personName: UILabel = {
         let personName = UILabel()
+        personName.textColor = .black
         personName.text = "daesiker"
         return personName
     }()
     
     let timeLabel: UILabel = {
         let timeLabel = UILabel()
+        timeLabel.textColor = .black
         timeLabel.text = "09:00 ~ 12:00"
         timeLabel.font = UIFont.boldSystemFont(ofSize: 14)
         return timeLabel
@@ -61,6 +63,7 @@ class CalendarCell: UITableViewCell {
     
     let detailLabel: UILabel = {
        let detailLabel = UILabel()
+        detailLabel.textColor = .black
         detailLabel.text = "버스킹"
         detailLabel.font = UIFont.boldSystemFont(ofSize: 14)
         return detailLabel
@@ -68,6 +71,7 @@ class CalendarCell: UITableViewCell {
     
     let lLabel: UILabel = {
        let lb = UILabel()
+        lb.textColor = .black
         lb.text = "홍대 놀이터"
         lb.font = UIFont.boldSystemFont(ofSize: 14)
         return lb

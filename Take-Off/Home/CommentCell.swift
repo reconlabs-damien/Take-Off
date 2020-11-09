@@ -14,9 +14,9 @@ class CommentCell: UICollectionViewCell {
         didSet {
             guard let comment = comment else { return }
             
-            let attributedText = NSMutableAttributedString(string: comment.user.username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText = NSMutableAttributedString(string: comment.user.username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
             
-            attributedText.append(NSAttributedString(string: " " + comment.text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+            attributedText.append(NSAttributedString(string: " " + comment.text, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
             
             textView.attributedText = attributedText
             
@@ -27,6 +27,8 @@ class CommentCell: UICollectionViewCell {
     let textView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 14)
+        textView.backgroundColor = .white
+        textView.textColor = .black
 //        label.numberOfLines = 0
 //        label.backgroundColor = .lightGray
         textView.isScrollEnabled = false
@@ -43,7 +45,7 @@ class CommentCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .yellow
+        backgroundColor = .white
         
         addSubview(profileImageView)
         profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)

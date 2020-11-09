@@ -8,21 +8,22 @@
 
 import UIKit
 import Firebase
-import OneSignal
 
 class AddListController: UIViewController {
     
     let titleLabel: UITextField = {
         let tf = UITextField()
         tf.font = UIFont.systemFont(ofSize: 20)
+        
         tf.placeholder = "제목"
-        tf.tintColor = .none
+        tf.textColor = .black
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
     let startDateLabel: UILabel = {
         let lb = UILabel()
+        lb.textColor = .black
         lb.font = UIFont.systemFont(ofSize: 20)
         lb.text = "시작"
         return lb
@@ -69,6 +70,7 @@ class AddListController: UIViewController {
         formatter.timeStyle = .short
         let time = formatter.string(from: Date())
         lb.font = UIFont.systemFont(ofSize: 20)
+        lb.textColor = .black
         lb.text = "종료"
         return lb
     }()
@@ -104,6 +106,7 @@ class AddListController: UIViewController {
     var locationTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont.systemFont(ofSize: 20)
+        tf.textColor = .black
         tf.placeholder = "장소"
         tf.tintColor = .none
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
@@ -230,7 +233,7 @@ class AddListController: UIViewController {
         guard let startTmp = startDateTime.titleLabel?.text else { return }
         guard let endTmp = endDateTime.titleLabel?.text else { return }
         
-        let dday = startTmp.dropLast(8)
+        let dday = startTmp.dropLast(9)
         let start = startTmp.dropFirst(7)
         let userCalendarRef = Database.database().reference().child("calendars").child(uid)
         let ref = userCalendarRef.childByAutoId()
@@ -241,9 +244,6 @@ class AddListController: UIViewController {
                 return
             }
             print("Successfully saved calendar to DB")
-            OneSignal.promptForPushNotifications(userResponse: { accepted in
-                print(uid)
-            })
             self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
     }

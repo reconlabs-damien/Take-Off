@@ -22,22 +22,22 @@ class UserProfileHeader: UICollectionViewCell {
     var delegate: UserProfileHeaderDelegate?
     var user: User? {
         didSet {
-            let attributedText2 = NSMutableAttributedString(string: String(postsCount) + "\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText2 = NSMutableAttributedString(string: String(postsCount) + "\n", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
             attributedText2.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
             postsLabel.attributedText = attributedText2
             
-            let attributedText1 = NSMutableAttributedString(string: String(followingCount) + "\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText1 = NSMutableAttributedString(string: String(followingCount) + "\n", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
             attributedText1.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
             followingLabel.attributedText = attributedText1
             
-            let attributedText = NSMutableAttributedString(string: String(followerCount) + "\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText = NSMutableAttributedString(string: String(followerCount) + "\n", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
             attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
             followersLabel.attributedText = attributedText
             guard let profileImageUrl = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             //setupProfileImage()
             usernameLabel.text = user?.username
-            
+            usernameLabel.textColor = .black
             setupEditFollowButton()
         }
     }

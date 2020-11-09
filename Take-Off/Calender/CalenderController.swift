@@ -51,6 +51,7 @@ class CalenderController: UIViewController, UITableViewDelegate, UITableViewData
     
     public let headTitle: UILabel = {
         let lb = UILabel()
+        lb.textColor = .black
         let dateformatter = DateFormatter()
         dateformatter.locale = Locale(identifier: "ko_KR")
         dateformatter.dateFormat = "M월 d일"
@@ -67,6 +68,7 @@ class CalenderController: UIViewController, UITableViewDelegate, UITableViewData
         tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .white
         let image = UIImage(named: "gear")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(addToDOList))
         view.backgroundColor = .white
@@ -183,8 +185,6 @@ class CalenderController: UIViewController, UITableViewDelegate, UITableViewData
         }
           
     }
-    
-    
     
     func fetchAllPosts() {
         calendars.removeAll()
