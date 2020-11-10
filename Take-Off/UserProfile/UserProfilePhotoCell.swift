@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: 나의 프로필 사진 업로드
 class UserProfilePhotoCell: UICollectionViewCell {
     
     var post: Post? {

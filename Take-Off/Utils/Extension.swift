@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: UIColor Extension(자주쓰는 색과 함수 축약)
 extension UIColor {
     
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
@@ -20,6 +21,7 @@ extension UIColor {
     
 }
 
+// MARK: AutoLayout을 위한 Extension
 extension UIView {
 func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?,  paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat) {
     
@@ -49,42 +51,10 @@ func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLay
         heightAnchor.constraint(equalToConstant: height).isActive = true
     }
 }
-    
-    func hideAnimated(in stackView: UIStackView) {
-        if !self.isHidden {
-            UIView.animate(
-                withDuration: 0.35,
-                delay: 0,
-                usingSpringWithDamping: 0.9,
-                initialSpringVelocity: 1,
-                options: [],
-                animations: {
-                    self.isHidden = true
-                    stackView.layoutIfNeeded()
-                },
-                completion: nil
-            )
-        }
-    }
 
-    func showAnimated(in stackView: UIStackView) {
-        if self.isHidden {
-            UIView.animate(
-                withDuration: 0.35,
-                delay: 0,
-                usingSpringWithDamping: 0.9,
-                initialSpringVelocity: 1,
-                options: [],
-                animations: {
-                    self.isHidden = false
-                    stackView.layoutIfNeeded()
-                },
-                completion: nil
-            )
-        }
-    }
 }
 
+// MARK: 시, 분, 초를 계산해주는 Date Extension
 extension Date {
 func timeAgoDisplay() -> String {
     let secondsAgo = Int(Date().timeIntervalSince(self))

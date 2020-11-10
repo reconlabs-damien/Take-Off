@@ -54,6 +54,7 @@ class LoginController: UIViewController {
         return tf
     }()
     
+    // MARK: 로그인 버튼 활성 / 비활성 설정
     @objc func handleTextInputChange() {
         let isFormValid = emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
@@ -82,6 +83,7 @@ class LoginController: UIViewController {
         return button
     }()
     
+    // MARK: Login function
     @objc func handleLogin() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
@@ -112,6 +114,7 @@ class LoginController: UIViewController {
         return button
     }()
     
+    // MARK: SignUpController로 이동
     @objc func handleShowSignUp() {
         let signUpController = SignUpController()
         navigationController?.pushViewController(signUpController, animated: true)
@@ -137,6 +140,7 @@ class LoginController: UIViewController {
         setupInputFields()
     }
     
+    // MARK: StackView 설정 함수(이메일, 비밀번호, 로그인 버튼)
     fileprivate func setupInputFields() {
         let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
         

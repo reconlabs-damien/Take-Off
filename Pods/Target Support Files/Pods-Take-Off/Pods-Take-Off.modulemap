@@ -1,0 +1,6 @@
+framework module Pods_Take_Off {
+  umbrella header "Pods-Take-Off-umbrella.h"
+
+  export *
+  module * { export * }
+}

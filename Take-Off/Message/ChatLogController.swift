@@ -266,6 +266,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         cell.message = message
         
         cell.textView.text = message.text
+        cell.textView.textColor = .black
         
         setupCell(cell, message: message)
         

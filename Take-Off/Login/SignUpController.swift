@@ -23,6 +23,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
+    // MARK: ImagePicker 생성
     @objc func handlePlusPhoto() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -31,6 +32,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         present(imagePickerController, animated: true, completion: nil)
     }
     
+    // MARK: ImagePicker로 받은 이미지 설정
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -59,6 +61,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return tf
     }()
     
+    // MARK: 회원가입 항목이 모두 공백이 아니여야 버튼 활성화
     @objc func handleTextInputChange() {
         let isFormValid = emailTextField.text?.isEmpty == false && usernameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
@@ -110,7 +113,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
-    
+    // MARK: 회원가입 Function
     @objc func handleSignUp() {
         guard let email = emailTextField.text else { return }
         guard let username = usernameTextField.text else { return }
@@ -192,11 +195,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
+    // MARK: LoginController로 돌아가는 함수
     @objc func handleAlreadyHaveAccount() {
         navigationController?.popViewController(animated: true)
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -215,6 +218,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         setupInputFields()
     }
     
+    // MARK: StackView 설정(이메일, 닉네임, 비밀번호, 회원가입버튼)
     fileprivate func setupInputFields() {
         let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton])
         stackView.distribution = .fillEqually

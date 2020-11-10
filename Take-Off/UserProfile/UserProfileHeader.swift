@@ -42,6 +42,7 @@ class UserProfileHeader: UICollectionViewCell {
         }
     }
     
+    // MARK: Follow / Unfollow 버튼 설정
     fileprivate func setupEditFollowButton() {
         
         guard let currentLoggedInUserId = Auth.auth().currentUser?.uid else { return }
@@ -67,6 +68,7 @@ class UserProfileHeader: UICollectionViewCell {
         }
     }
     
+    // MARK: Following 테이블 추가 및 삭제
     @objc func handleEditProfileOrFollow() {
         
         guard let currentLoggedInUserId = Auth.auth().currentUser?.uid else { return }
@@ -99,6 +101,7 @@ class UserProfileHeader: UICollectionViewCell {
         }
     }
     
+    // MARK: FollowButton 초기 UI
     fileprivate func setupFollowStyle() {
         self.editProfileFollowButton.setTitle("Follow", for: .normal)
         self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 255, green: 85, blue: 54)
@@ -212,7 +215,7 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     
-    //팔로워수, 팔로잉수, 게시물수를 설정하는 함수
+    // MARK: 팔로워수, 팔로잉수, 게시물수를 설정하는 함수
     func setupCounter() {
         // 현재 사용자 uid를 상수로 지정
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -256,6 +259,7 @@ class UserProfileHeader: UICollectionViewCell {
         
     }
     
+    // MARK: posts, followers, following label stackView Layout
     fileprivate func setupUserStatsView() {
         setupCounter()
         let stackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
@@ -264,6 +268,7 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)
     }
     
+    // MARK: 게시물 표시형식 버튼 및 저장된 게시물 버튼 설정
     fileprivate func setupBottomToolBar() {
         
         let topDividerView = UIView()

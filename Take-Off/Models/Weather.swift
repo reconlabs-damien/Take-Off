@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// MARK: weather API Model
 struct ApiBar {
     var time: String
     var apiIndex: Double

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: calendars DB Model
 struct Calendar {
     var user: String
     var dday: String

@@ -28,9 +28,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         //컬렉션뷰의 refreshControl을 refreshControl로 선언
         collectionView?.refreshControl = refreshControl
-        
         setupNavigationItems()
-        
         fetchAllPosts()
     }
     
@@ -38,17 +36,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         handleRefresh()
     }
     
+    // MARK: 새로고침을 할떄 포스트 업로드
     @objc func handleRefresh() {
         //포스트를 다 지우고 새롭게 포스트를 업로드
         posts.removeAll()
         fetchAllPosts()
     }
     
+    // MARK: 처음 화면표시할때 게시물 업로드
     fileprivate func fetchAllPosts() {
         fetchPosts()
         fetchFollowingUserIds()
     }
     
+    // MARK: follow를 한 유저정보 업로드
     fileprivate func fetchFollowingUserIds() {
         //uid에 현재 로그인한 유저의 uid를 저장
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -73,11 +74,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
     var posts = [Post]()
+    // MARK: user 정보 확인
     fileprivate func fetchPosts() {
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        
         Database.fetchUserWithUID(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
         }
@@ -129,7 +128,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             print("Failed to fetch posts:", err)
         }
     }
-    //네비게이션 아이템을 설정해주는 메서드
+    // MARK: 네비게이션 아이템을 설정해주는 메서드
     func setupNavigationItems() {
         //타이틀 지정
         navigationItem.title = "Megazine"
@@ -139,12 +138,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.leftBarButtonItem?.tintColor = .black
     }
     
+    // MARK: dismiss
     @objc func handleCancel() {
-        //뒤로가기
         dismiss(animated: true, completion: nil)
     }
     
-    //컬렉션뷰의 셀의 크기를 지정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var height: CGFloat = 40 + 8 + 8 //username userprofileimageview
@@ -155,12 +153,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return CGSize(width: view.frame.width, height: height)
     }
     
-    //컬렉션뷰의 셀의 갯수를 지정
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
     
-    //cell 정보를 설정
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         //cell 정보를 HomePostCell에 상속
@@ -171,7 +167,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         return cell
     }
-    //MessageController로 이동하는 메서드
+    
+    // MARK: MessageController로 이동하는 메서드
     func didTapComment(post: Post) {
         print("Message coming from HomeController")
         
@@ -181,7 +178,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
     }
     
-    //좋아요 함수
+    // MARK: 좋아요 함수
     func didLkike(for cell: HomePostCell) {
            guard let indexPath = collectionView?.indexPath(for: cell) else { return }
            var post = self.posts[indexPath.item]

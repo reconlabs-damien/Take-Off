@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+// MARK: message DB Model
 class Message: NSObject {
 
     var fromId: String?

@@ -71,6 +71,8 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     
     var filteredUsers = [User]()
     var users = [User]()
+    
+    //MARK: Users테이블에 모든 데이터를 가져옴
     fileprivate func fetchUsers() {
         //users 테이블에 있는 데이터를 가져옴
         let ref = Database.database().reference().child("users")

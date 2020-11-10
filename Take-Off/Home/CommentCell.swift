@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: 댓글 table Cell Layout
 class CommentCell: UICollectionViewCell {
     
     var comment: Comment? {

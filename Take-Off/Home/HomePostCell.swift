@@ -35,6 +35,7 @@ class HomePostCell: UICollectionViewCell {
         }
     }
     
+    // MARK: 게시물 형식 설정
     fileprivate func setupAttributedCaption() {
         
         guard let post = self.post else { return }
@@ -142,6 +143,7 @@ class HomePostCell: UICollectionViewCell {
         captionLabel.anchor(top: likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
     }
     
+    // MARK: 종아요, 댓글, 메세지버튼 Layout 설정
     fileprivate func setupActionButtons() {
         let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton, sendMessageButton])
         stackView.distribution = .fillEqually

@@ -39,6 +39,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     var images = [UIImage]()
     var assets = [PHAsset]()
     
+    
     fileprivate func assetsFetchOptions() -> PHFetchOptions {
         let fetchOptions = PHFetchOptions()
         fetchOptions.fetchLimit = 30

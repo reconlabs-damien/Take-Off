@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: users DB Model
 struct User {
     
     var uid: String

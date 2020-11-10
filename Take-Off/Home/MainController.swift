@@ -34,10 +34,10 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
-    fileprivate let imageName = ["태1.jpeg", "태2.jpeg", "태3.jpeg", "태4.jpeg"]
     var imageNames: [UIImage] = []
     fileprivate let adNames = ["광1.png", "광2.png", "광3.png"]
     
+    // MARK: FSPagerView안에 데이터 삽입
     func uploadNewPost() {
         //파이어베이스 Storage안에 posts 폴더를 ref란 상수에 정의
         let ref = Storage.storage().reference().child("posts/")
@@ -134,7 +134,7 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
         return cell
     }
     
-    
+    // MARK: HomeController로 이동
     @objc func handleHome() {
         let homeController = HomeController(collectionViewLayout: UICollectionViewFlowLayout())
         let navController = UINavigationController(rootViewController: homeController)
@@ -187,17 +187,20 @@ class MainController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSour
         adView.anchor(top: hotPostView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: -5, paddingRight: 5, width: 0, height: 0)
     }
     
+    // MARK: UserSearchController로 이동
     @objc func handleSearch() {
         let userSearchController = UserSearchController(collectionViewLayout: UICollectionViewFlowLayout())
         let navController = UINavigationController(rootViewController: userSearchController)
         self.present(navController, animated:  true, completion: nil)
     }
     
+    // MARK: Navigation Items 설정
     func setupNavigationItems() {
         navigationItem.titleView = UIImageView(image: UIImage(named: "home_logo"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera3")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
     }
     
+    // MARK: Camera Controller로 이동
     @objc func handleCamera() {
         let cameraController = CameraController()
         present(cameraController, animated: true, completion: nil)

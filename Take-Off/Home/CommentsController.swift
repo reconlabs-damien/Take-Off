@@ -33,13 +33,13 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     var comments = [Comment]()
+    // MARK: 게시물 댓글 업로드
     fileprivate func fetchComments() {
         guard let postId = self.post?.id else { return }
         let ref = Database.database().reference().child("comments").child(postId)
         ref.observe(.childAdded, with: { (snapshot) in
             
             guard let dictionary = snapshot.value as? [String: Any] else { return }
-            
             guard let uid = dictionary["uid"] as? String else { return }
             
             Database.fetchUserWithUID(uid: uid, completion: { (user) in
@@ -124,6 +124,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         return textField
     }()
     
+    // MARK: 댓글 작성시 DB에 저장하는 function
     @objc func handleSubmit() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         

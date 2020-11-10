@@ -9,6 +9,7 @@ import UIKit
 
 var imageCache = [String: UIImage]()
 
+// MARK: DB에 있는 이미지 추출할 때 사용하는 Class
 class CustomImageView: UIImageView {
     
     var lastURLUsedToLoadImage: String?

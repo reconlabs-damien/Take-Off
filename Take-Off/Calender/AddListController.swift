@@ -233,7 +233,8 @@ class AddListController: UIViewController {
         guard let startTmp = startDateTime.titleLabel?.text else { return }
         guard let endTmp = endDateTime.titleLabel?.text else { return }
         
-        let dday = startTmp.dropLast(9)
+        let tmp_dday = startTmp.dropLast(8)
+        let dday = tmp_dday.trimmingCharacters(in: .whitespaces)
         let start = startTmp.dropFirst(7)
         let userCalendarRef = Database.database().reference().child("calendars").child(uid)
         let ref = userCalendarRef.childByAutoId()

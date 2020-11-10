@@ -34,18 +34,14 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerId")
         collectionView?.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: homePostCellId)
-        
         setupLogOutButton()
-        
         fetchUser()
-        
-        //fetchOrderedPosts()
     }
     
     var isFinishedPaging = false
     var posts = [Post]()
     
-    //게시물의 보기형식을 변경하는 함수
+    // MARK: 게시물의 표시형식 변경 함수(가로, 세로)
     fileprivate func paginatePosts() {
         //uid 상수 정의
         guard let uid = self.user?.uid else { return }
@@ -93,6 +89,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
     }
     
+    // MARK: DB posts 테이블에 게시물을 날짜순으로 정렬하여 collectionView에 저장
     fileprivate func fetchOrderedPosts() {
         guard let uid = self.user?.uid else { return }
         let ref = Database.database().reference().child("posts").child(uid)
@@ -111,10 +108,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
     }
     
+    // MARK: 네비게이션 아이템 추가
     fileprivate func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
     }
     
+    // MARK: 아이템에 SignOut과 Cancel 버튼 추가
     @objc func handleLogOut() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -193,6 +192,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     var user: User?
+    
+    // MARK: userId에 따라 표시하는 사용자 변경
     fileprivate func fetchUser() {
         
         let uid = userId ?? (Auth.auth().currentUser?.uid ?? "")

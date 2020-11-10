@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 extension Database {
-    //가져온 uid를 통해서 해당 uid의 유저 정보를 가져와주는 메서드
+    // MARK: 가져온 uid를 통해서 해당 uid의 유저 정보를 가져와주는 메서드
     static func fetchUserWithUID(uid: String, completion: @escaping (User) -> ()) {
         print("Fetching user with uid:", uid)
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in

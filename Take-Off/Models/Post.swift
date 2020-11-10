@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: posts DB Model
 struct Post {
     
     var id: String?

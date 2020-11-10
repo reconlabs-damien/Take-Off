@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: comments DB Model
 struct Comment {
     
     let user: User
