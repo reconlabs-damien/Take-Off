@@ -11,15 +11,15 @@
 
 
 ### ___#1___
-<img src="Take-Off/이미지/Screenshot/LoginController.png" width="200" height="400"><img src="Take-Off/이미지/Screenshot/SignupController.png" width="200" height="400"> <img src="Take-Off/이미지/Screenshot/MainController.gif" width="200" height="400"> <img src="Take-Off/이미지/Screenshot/PostController.png" width="200" height="400"> 
+<img src="Take-Off/이미지/ScreenShot/LoginController.png" width="200" height="400"><img src="Take-Off/이미지/ScreenShot/SignupController.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/MainController.gif" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/PostController.png" width="200" height="400"> 
 
 
 ### ___#2___
-<img src="Take-Off/이미지/Screenshot/MessageController.png" width="200" height="400"> <img src="Take-Off/이미지/Screenshot/MessageController2.png" width="200" height="400">  <img src="Take-Off/이미지/Screenshot/MessageController3.png" width="200" height="400"> <img src="Take-Off/이미지/Screenshot/MessageController4.png" width="200" height="400"> 
+<img src="Take-Off/이미지/ScreenShot/MessageController.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/MessageController2.png" width="200" height="400">  <img src="Take-Off/이미지/ScreenShot/MessageController3.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/MessageController4.png" width="200" height="400"> 
 
 
 ### ___#3___
-<img src="Take-Off/이미지/Screenshot/AddPostController.png" width="200" height="400"> <img src="Take-Off/이미지/Screenshot/CalendarController.png" width="200" height="400"> <img src="Take-Off/이미지/Screenshot/UserprofileController.png" width="200" height="400"> 
+<img src="Take-Off/이미지/Screenshot/AddPostController.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/CalendarController.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/UserprofileController.png" width="200" height="400"> 
 
 
 
