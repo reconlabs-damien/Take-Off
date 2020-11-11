@@ -11,7 +11,7 @@
 
 
 ### ___#1___
-<img src="Take-Off/이미지/ScreenShot/LoginController.png" width="200" height="400"><img src="Take-Off/이미지/ScreenShot/SignupController.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/MainController.gif" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/PostController.png" width="200" height="400"> 
+<img src="이미지/ScreenShot/LoginController.png" width="200" height="400"><img src="Take-Off/이미지/ScreenShot/SignupController.png" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/MainController.gif" width="200" height="400"> <img src="Take-Off/이미지/ScreenShot/PostController.png" width="200" height="400"> 
 
 
 ### ___#2___
